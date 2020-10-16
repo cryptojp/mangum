@@ -171,6 +171,8 @@ class Mangum:
                 body = base64.b64decode(body)
             elif not isinstance(body, bytes):
                 body = body.encode()
+            
+            headers["content_length"] = str(len(body))
 
             asgi_cycle = HTTPCycle(
                 scope, body=body, text_mime_types=self.text_mime_types
